@@ -1,0 +1,340 @@
+exit	1	int error_code
+fork	2
+read	3	unsigned int fd	char *buf	size_t count
+write	4	unsigned int fd	const char *buf	size_t count
+_open	5	const char *filename	int flags	umode_t mode
+close	6	unsigned int fd
+creat	8	const char *pathname	umode_t mode
+link	9	const char *oldname	const char *newname
+unlink	10	const char *pathname
+_execve	11	const char *filenamei	const char *const *argv	const char *const *envp
+chdir	12	const char *filename
+_time	13	time_t *tloc
+_mknod	14	const char *filename	umode_t mode	unsigned dev
+chmod	15	const char *filename	umode_t mode
+lchown	16	const char *filename	uid_t user	gid_t group
+lseek	19	unsigned int fd	off_t offset	unsigned int origin
+getpid	20
+mount	21	char *dev_name	char *dir_name	char *type	unsigned long flags	void *data
+umount	22	char *name	int flags
+setuid	23	uid_t uid
+getuid	24
+stime	25	time_t *tptr
+ptrace	26	long request	long pid	unsigned long addr	unsigned long data
+alarm	27	unsigned int seconds
+pause	29
+utime	30	char *filename	struct utimbuf *times
+access	33	const char *filename	int mode
+nice	34	int increment
+sync	36
+kill	37	pid_t pid	int sig
+rename	38	const char *oldname	const char *newname
+mkdir	39	const char *pathname	umode_t mode
+rmdir	40	const char *pathname
+dup	41	unsigned int fildes
+pipe	42	int *fildes
+times	43	struct tms *tbuf
+_brk	45	unsigned long brk
+setgid	46	gid_t gid
+getgid	47
+geteuid	49
+getegid	50
+acct	51	const char *name
+umount2	52	char *name	int flags
+ioctl	54	unsigned int fd	unsigned int cmd	unsigned long arg
+fcntl	55	unsigned int fd	unsigned int cmd	unsigned long arg
+setpgid	57	pid_t pid	pid_t pgid
+umask	60	int mask
+chroot	61	const char *filename
+ustat	62	unsigned dev	struct ustat *ubuf
+dup2	63	unsigned int oldfd	unsigned int newfd
+getppid	64
+getpgrp	65
+setsid	66
+sigaction	67	int sig	const struct old_sigaction *act	struct old_sigaction *oact
+setreuid	70	uid_t ruid	uid_t euid
+setregid	71	gid_t rgid	gid_t egid
+sigsuspend	72	int restart	unsigned long oldmask	old_sigset_t mask
+sigpending	73	old_sigset_t *set
+sethostname	74	char *name	int len
+setrlimit	75	unsigned int resource	struct rlimit *rlim
+getrlimit	76	unsigned int resource	struct rlimit *rlim
+getrusage	77	int who	struct rusage *ru
+gettimeofday	78	struct timeval *tv	struct timezone *tz
+settimeofday	79	struct timeval *tv	struct timezone *tz
+getgroups	80	int gidsetsize	gid_t *grouplist
+setgroups	81	int gidsetsize	gid_t *grouplist
+select	82	int n	fd_set *inp	fd_set *outp	fd_set *exp	struct timeval *tvp
+symlink	83	const char *oldname	const char *newname
+readlink	85	const char *path	char *buf	int bufsiz
+uselib	86	const char *library
+swapon	87	const char *specialfile	int swap_flags
+reboot	88	int magic1	int magic2	unsigned int cmd	void *arg
+_readdir	89	unsigned int fd	struct old_linux_dirent *dirent	unsigned int count
+mmap	90	struct mmap_arg_struct *arg
+munmap	91	unsigned long addr	size_t len
+truncate	92	const char *path	long length
+ftruncate	93	unsigned int fd	unsigned long length
+fchmod	94	unsigned int fd	umode_t mode
+fchown	95	unsigned int fd	uid_t user	gid_t group
+getpriority	96	int which	int who
+setpriority	97	int which	int who	int niceval
+statfs	99	const char *pathname	struct statfs *buf
+fstatfs	100	unsigned int fd	struct statfs *buf
+socketcall	102	int call	unsigned long *args
+syslog	103	int type	char *buf	int len
+setitimer	104	int which	struct itimerval *value	struct itimerval *ovalue
+getitimer	105	int which	struct itimerval *value
+stat	106	const char *filename	struct __old_kernel_stat *statbuf
+lstat	107	const char *filename	struct __old_kernel_stat *statbuf
+fstat	108	unsigned int fd	struct __old_kernel_stat *statbuf
+vhangup	111
+syscall	113
+wait4	114	pid_t upid	int *stat_addr	int options	struct rusage *ru
+swapoff	115	const char *specialfile
+sysinfo	116	struct sysinfo *info
+ipc	117	unsigned int call	int first	unsigned long second	unsigned long third	void *ptr	long fifth
+fsync	118	unsigned int fd
+sigreturn	119
+_clone	120	unsigned long clone_flags	unsigned long newsp	int *parent_tidptr	int tls_val	int *child_tidptr
+setdomainname	121	char *name	int len
+uname	122	struct old_utsname *name
+adjtimex	124	struct timex *txc_p
+mprotect	125	unsigned long start	size_t len	unsigned long prot
+sigprocmask	126	int how	old_sigset_t *nset	old_sigset_t *oset
+init_module	128	void *umod	unsigned long len	const char *uargs
+delete_module	129	const char *name_user	unsigned int flags
+quotactl	131	unsigned int cmd	const char *special	qid_t id	void *addr
+getpgid	132	pid_t pid
+fchdir	133	unsigned int fd
+bdflush	134	int func	long data
+sysfs	135	int option	unsigned long arg1	unsigned long arg2
+personality	136	unsigned int personality
+setfsuid	138	uid_t uid
+setfsgid	139	gid_t gid
+_llseek	140	unsigned int fd	unsigned long offset_high	unsigned long offset_low	loff_t *result	unsigned int origin
+getdents	141	unsigned int fd	struct linux_dirent *dirent	unsigned int count
+_newselect	142	int n	fd_set *inp	fd_set *outp	fd_set *exp	struct timeval *tvp
+flock	143	unsigned int fd	unsigned int cmd
+msync	144	unsigned long start	size_t len	int flags
+readv	145	unsigned long fd	const struct iovec *vec	unsigned long vlen
+writev	146	unsigned long fd	const struct iovec *vec	unsigned long vlen
+getsid	147	pid_t pid
+fdatasync	148	unsigned int fd
+_sysctl	149	struct __sysctl_args *args
+mlock	150	unsigned long start	size_t len
+munlock	151	unsigned long start	size_t len
+mlockall	152	int flags
+munlockall	153
+sched_setparam	154	pid_t pid	struct sched_param *param
+sched_getparam	155	pid_t pid	struct sched_param *param
+sched_setscheduler	156	pid_t pid	int policy	struct sched_param *param
+sched_getscheduler	157	pid_t pid
+sched_yield	158
+sched_get_priority_max	159	int policy
+sched_get_priority_min	160	int policy
+sched_rr_get_interval	161	pid_t pid	struct timespec *interval
+nanosleep	162	struct timespec *rqtp	struct timespec *rmtp
+mremap	163	unsigned long addr	unsigned long old_len	unsigned long new_len	unsigned long flags	unsigned long new_addr
+setresuid	164	uid_t ruid	uid_t euid	uid_t suid
+getresuid	165	uid_t *ruidp	uid_t *euidp	uid_t *suidp
+poll	168	struct pollfd *ufds	unsigned int nfds	int timeout_msecs
+setresgid	170	gid_t rgid	gid_t egid	gid_t sgid
+getresgid	171	gid_t *rgidp	gid_t *egidp	gid_t *sgidp
+prctl	172	int option	unsigned long arg2	unsigned long arg3	unsigned long arg4	unsigned long arg5
+rt_sigreturn	173
+rt_sigaction	174	int sig	const struct sigaction *act	struct sigaction *oact	size_t sigsetsize
+rt_sigprocmask	175	int how	sigset_t *nset	sigset_t *oset	size_t sigsetsize
+rt_sigpending	176	sigset_t *set	size_t sigsetsize
+rt_sigtimedwait	177	const sigset_t *uthese	siginfo_t *uinfo	const struct timespec *uts	size_t sigsetsize
+rt_sigqueueinfo	178	pid_t pid	int sig	siginfo_t *uinfo
+rt_sigsuspend	179	sigset_t *unewset	size_t sigsetsize
+pread64	180	char *buf size_t count	loff_t pos
+pwrite64	181	const char *buf size_t count	loff_t pos
+chown	182	const char *filename	uid_t user	gid_t group
+getcwd	183	char *buf	unsigned long size
+capget	184	cap_user_header_t header	cap_user_data_t dataptr
+capset	185	cap_user_header_t header	const cap_user_data_t data
+sendfile	187	int out_fd	int in_fd	off_t *offset	size_t count
+vfork	190
+ugetrlimit	191	unsigned int resource	struct rlimit *rlim
+mmap2	192	unsigned long addr	unsigned long len	unsigned long prot	unsigned long flags	unsigned long fd	unsigned long pgoff
+truncate64	193	loff_t length
+ftruncate64	194	loff_t length
+stat64	195	const char *filename	struct stat64 *statbuf
+lstat64	196	const char *filename	struct stat64 *statbuf
+fstat64	197	unsigned long fd	struct stat64 *statbuf
+lchown32	198	const char *filename	uid_t user	gid_t group
+getuid32	199
+getgid32	200
+geteuid32	201
+getegid32	202
+setreuid32	203	uid_t ruid	uid_t euid
+setregid32	204	gid_t rgid	gid_t egid
+getgroups32	205	int gidsetsize	gid_t *grouplist
+setgroups32	206	int gidsetsize	gid_t *grouplist
+fchown32	207	unsigned int fd	uid_t user	gid_t group
+setresuid32	208	uid_t ruid	uid_t euid	uid_t suid
+getresuid32	209	uid_t *ruidp	uid_t *euidp	uid_t *suidp
+setresgid32	210	gid_t rgid	gid_t egid	gid_t sgid
+getresgid32	211	gid_t *rgidp	gid_t *egidp	gid_t *sgidp
+chown32	212	const char *filename	uid_t user	gid_t group
+setuid32	213	uid_t uid
+setgid32	214	gid_t gid
+setfsuid32	215	uid_t uid
+setfsgid32	216	gid_t gid
+getdents64	217	unsigned int fd	struct linux_dirent64 *dirent	unsigned int count
+pivot_root	218	const char *new_root	const char *put_old
+mincore	219	unsigned long start	size_t len	unsigned char *vec
+madvise	220	unsigned long start	size_t len_in	int behavior
+fcntl64	221	unsigned int fd	unsigned int cmd	unsigned long arg
+gettid	224
+readahead	225	loff_t offset size_t count
+setxattr	226	const char *pathname	const char *name	const void *value	size_t size	int flags
+lsetxattr	227	const char *pathname	const char *name	const void *value	size_t size	int flags
+fsetxattr	228	int fd	const char *name	const void *value	size_t size	int flags
+getxattr	229	const char *pathname	const char *name	void *value	size_t size
+lgetxattr	230	const char *pathname	const char *name	void *value	size_t size
+fgetxattr	231	int fd	const char *name	void *value	size_t size
+listxattr	232	const char *pathname	char *list	size_t size
+llistxattr	233	const char *pathname	char *list	size_t size
+flistxattr	234	int fd	char *list	size_t size
+removexattr	235	const char *pathname	const char *name
+lremovexattr	236	const char *pathname	const char *name
+fremovexattr	237	int fd	const char *name
+tkill	238	pid_t pid	int sig
+sendfile64	239	int out_fd	int in_fd	loff_t *offset	size_t count
+futex	240	u32 *uaddr	int op	u32 val	struct timespec *utime	u32 *uaddr2	u32 val3
+sched_setaffinity	241	pid_t pid	unsigned int len	unsigned long *user_mask_ptr
+sched_getaffinity	242	pid_t pid	unsigned int len	unsigned long *user_mask_ptr
+io_setup	243	unsigned nr_events	aio_context_t *ctxp
+io_destroy	244	aio_context_t ctx
+io_getevents	245	aio_context_t ctx_id	long min_nr	long nr	struct io_event *events	struct timespec *timeout
+io_submit	246	aio_context_t ctx_id	long nr	struct iocb * *iocbpp
+io_cancel	247	aio_context_t ctx_id	struct iocb *iocb	struct io_event *result
+exit_group	248	int error_code
+lookup_dcookie	249	char *buf size_t len
+epoll_create	250	int size
+epoll_ctl	251	int epfd	int op	int fd	struct epoll_event *event
+epoll_wait	252	int epfd	struct epoll_event *events	int maxevents	int timeout
+remap_file_pages	253	unsigned long start	unsigned long size	unsigned long prot	unsigned long pgoff	unsigned long flags
+set_tid_address	256	int *tidptr
+timer_create	257	const clockid_t which_clock	struct sigevent *timer_event_spec	timer_t *created_timer_id
+timer_settime	258	timer_t timer_id	int flags	const struct itimerspec *new_setting	struct itimerspec *old_setting
+timer_gettime	259	timer_t timer_id	struct itimerspec *setting
+timer_getoverrun	260	timer_t timer_id
+timer_delete	261	timer_t timer_id
+clock_settime	262	const clockid_t which_clock	const struct timespec *tp
+clock_gettime	263	const clockid_t which_clock	struct timespec *tp
+clock_getres	264	const clockid_t which_clock	struct timespec *tp
+clock_nanosleep	265	const clockid_t which_clock	int flags	const struct timespec *rqtp	struct timespec *rmtp
+statfs64	266	const char *pathname	size_t sz	struct statfs64 *buf
+fstatfs64	267	unsigned int fd	size_t sz	struct statfs64 *buf
+tgkill	268	pid_t tgid	pid_t pid	int sig
+utimes	269	char *filename	struct timeval *utimes
+arm_fadvise64_64	270	int fd	int advice	loff_t offset	loff_t len
+pciconfig_read	272	unsigned long bus	unsigned long dfn	unsigned long off	unsigned long len	void *buf
+pciconfig_write	273	unsigned long bus	unsigned long dfn	unsigned long off	unsigned long len	void *buf
+mq_open	274	const char *u_name	int oflag	umode_t mode	struct mq_attr *u_attr
+mq_unlink	275	const char *u_name
+mq_timedsend	276	mqd_t mqdes	const char *u_msg_ptr	size_t msg_len	unsigned int msg_prio	const struct timespec *u_abs_timeout
+mq_timedreceive	277	mqd_t mqdes	char *u_msg_ptr	size_t msg_len	unsigned int *u_msg_prio	const struct timespec *u_abs_timeout
+mq_notify	278	mqd_t mqdes	const struct sigevent *u_notification
+mq_getsetattr	279	mqd_t mqdes	const struct mq_attr *u_mqstat	struct mq_attr *u_omqstat
+waitid	280	int which	pid_t upid	struct siginfo *infop	int options	struct rusage *ru
+socket	281	int family	int type	int protocol
+bind	282	int fd	struct sockaddr *umyaddr	int addrlen
+connect	283	int fd	struct sockaddr *uservaddr	int addrlen
+listen	284	int fd	int backlog
+accept	285	int fd	struct sockaddr *upeer_sockaddr	int *upeer_addrlen
+getsockname	286	int fd	struct sockaddr *usockaddr	int *usockaddr_len
+getpeername	287	int fd	struct sockaddr *usockaddr	int *usockaddr_len
+socketpair	288	int family	int type	int protocol	int *usockvec
+send	289	int fd	void *buff	size_t len	unsigned int flags
+sendto	290	int fd	void *buff	size_t len	unsigned int flags	struct sockaddr *addr	int addr_len
+recv	291	int fd	void *ubuf	size_t size	unsigned int flags
+recvfrom	292	int fd	void *ubuf	size_t size	unsigned int flags	struct sockaddr *addr	int *addr_len
+shutdown	293	int fd	int how
+setsockopt	294	int fd	int level	int optname	char *optval	int optlen
+getsockopt	295	int fd	int level	int optname	char *optval	int *optlen
+sendmsg	296	int fd	struct msghdr *msg	unsigned int flags
+recvmsg	297	int fd	struct msghdr *msg	unsigned int flags
+semop	298	int semid	struct sembuf *tsops	unsigned nsops
+semget	299	key_t key	int nsems	int semflg
+semctl	300	int semnum int cmd	union semun arg
+msgsnd	301	int msqid	struct msgbuf *msgp	size_t msgsz	int msgflg
+msgrcv	302	int msqid	struct msgbuf *msgp	size_t msgsz	long msgtyp	int msgflg
+msgget	303	key_t key	int msgflg
+msgctl	304	int msqid	int cmd	struct msqid_ds *buf
+shmat	305	int shmid	char *shmaddr	int shmflg
+shmdt	306	char *shmaddr
+shmget	307	key_t key	size_t size	int shmflg
+shmctl	308	int shmid	int cmd	struct shmid_ds *buf
+add_key	309	const char *_type	const char *_description	const void *_payload	size_t plen	key_serial_t ringid
+request_key	310	const char *_type	const char *_description	const char *_callout_info	key_serial_t destringid
+keyctl	311	int option	unsigned long arg2	unsigned long arg3	unsigned long arg4	unsigned long arg5
+semtimedop	312	int semid	struct sembuf *tsops	unsigned nsops	const struct timespec *timeout
+ioprio_set	314	int which	int who	int ioprio
+ioprio_get	315	int which	int who
+inotify_init	316
+inotify_add_watch	317	int fd	const char *pathname	u32 mask
+inotify_rm_watch	318	int fd	__s32 wd
+mbind	319	unsigned long start	unsigned long len	unsigned long mode	unsigned long *nmask	unsigned long maxnode	unsigned flags
+get_mempolicy	320	int *policy	unsigned long *nmask	unsigned long maxnode	unsigned long addr	unsigned long flags
+set_mempolicy	321	int mode	unsigned long *nmask	unsigned long maxnode
+openat	322	int dfd	const char *filename	int flags	umode_t mode
+mkdirat	323	int dfd	const char *pathname	umode_t mode
+mknodat	324	int dfd	const char *filename	umode_t mode	unsigned dev
+fchownat	325	int dfd	const char *filename	uid_t user	gid_t group	int flag
+futimesat	326	int dfd	const char *filename	struct timeval *utimes
+fstatat64	327	int dfd	const char *filename	struct stat64 *statbuf	int flag
+unlinkat	328	int dfd	const char *pathname	int flag
+renameat	329	int olddfd	const char *oldname	int newdfd	const char *newname
+linkat	330	int olddfd	const char *oldname	int newdfd	const char *newname	int flags
+symlinkat	331	const char *oldname	int newdfd	const char *newname
+readlinkat	332	int dfd	const char *pathname	char *buf	int bufsiz
+fchmodat	333	int dfd	const char *filename	umode_t mode
+faccessat	334	int dfd	const char *filename	int mode
+pselect6	335	int n	fd_set *inp	fd_set *outp	fd_set *exp	struct timespec *tsp	void *sig
+ppoll	336	struct pollfd *ufds	unsigned int nfds	struct timespec *tsp	const sigset_t *sigmask	size_t sigsetsize
+unshare	337	unsigned long unshare_flags
+set_robust_list	338	struct robust_list_head *head	size_t len
+get_robust_list	339	int pid	struct robust_list_head * *head_ptr	size_t *len_ptr
+splice	340	int fd_in	loff_t *off_in	int fd_out	loff_t *off_out	size_t len	unsigned int flags
+sync_file_range2	341	unsigned int flags loff_t offset	loff_t nbytes
+tee	342	int fdin	int fdout	size_t len	unsigned int flags
+vmsplice	343	int fd	const struct iovec *iov	unsigned long nr_segs	unsigned int flags
+move_pages	344	pid_t pid	unsigned long nr_pages	const void * *pages	const int *nodes	int *status	int flags
+getcpu	345	unsigned *cpup	unsigned *nodep	struct getcpu_cache *unused
+epoll_pwait	346	int epfd	struct epoll_event *events	int maxevents	int timeout	const sigset_t *sigmask	size_t sigsetsiz
+kexec_load	347	unsigned long entry	unsigned long nr_segments	struct kexec_segment *segments	unsigned long flags
+utimensat	348	int dfd	const char *filename	struct timespec *utimes	int flags
+signalfd	349	int ufd	sigset_t *user_mask	size_t sizemask
+timerfd_create	350	int clockid	int flags
+eventfd	351	unsigned int count
+fallocate	352	int mode loff_t offset	loff_t len
+timerfd_settime	353	int ufd	int flags	const struct itimerspec *utmr	struct itimerspec *otmr
+timerfd_gettime	354	int ufd	struct itimerspec *otmr
+signalfd4	355	int ufd	sigset_t *user_mask	size_t sizemask	int flags
+eventfd2	356	unsigned int count	int flags
+epoll_create1	357	int flags
+dup3	358	unsigned int oldfd	unsigned int newfd	int flags
+pipe2	359	int *fildes	int flags
+inotify_init1	360	int flags
+preadv	361	unsigned long fd	const struct iovec *vec	unsigned long vlen	unsigned long pos_l	unsigned long pos_h
+pwritev	362	unsigned long fd	const struct iovec *vec	unsigned long vlen	unsigned long pos_l	unsigned long pos_h
+rt_tgsigqueueinfo	363	pid_t tgid	pid_t pid	int sig	siginfo_t *uinfo
+perf_event_open	364	struct perf_event_attr *attr_uptr	pid_t pid	int cpu	int group_fd	unsigned long flags
+recvmmsg	365	int fd	struct mmsghdr *mmsg	unsigned int vlen	unsigned int flags	struct timespec *timeout
+accept4	366	int fd	struct sockaddr *upeer_sockaddr	int *upeer_addrlen	int flags
+fanotify_init	367	unsigned int flags	unsigned int event_f_flags
+fanotify_mark	368	unsigned int flags __u64 mask	int dfd const char *pathname
+prlimit64	369	pid_t pid	unsigned int resource	const struct rlimit64 *new_rlim	struct rlimit64 *old_rlim
+name_to_handle_at	370	int dfd	const char *name	struct file_handle *handle	int *mnt_id	int flag
+open_by_handle_at	371	int mountdirfd	struct file_handle *handle	int flags
+clock_adjtime	372	const clockid_t which_clock	struct timex *utx
+syncfs	373	int fd
+sendmmsg	374	int fd	struct mmsghdr *mmsg	unsigned int vlen	unsigned int flags
+setns	375	int fd	int nstype
+process_vm_readv	376	pid_t pid	const struct iovec *lvec	unsigned long liovcnt	const struct iovec *rvec	unsigned long riovcnt	unsigned long flags
+process_vm_writev	377	pid_t pid	const struct iovec *lvec	unsigned long liovcnt	const struct iovec *rvec	unsigned long riovcnt	unsigned long flags

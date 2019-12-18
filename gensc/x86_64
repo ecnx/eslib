@@ -1,0 +1,28 @@
+#!/bin/bash
+in=syscall/x86_64
+out=arch/x86_64/syscall.S
+echo "Reading from ${in} ..."
+echo "Writing to ${out} ..."
+
+nshreg=0
+while read -r line; do
+    num=$(echo "$line" | awk '{print $1}')
+    name=$(echo "$line" | awk '{print $2}' | sed 's/sys_//g')
+    nargs=$(echo "$line" | tr '\t' '\n' | grep -c '.')
+    echo "${num} -- ${name} -- ${nargs}" 1>&2
+    echo ".section .text.${name}"
+    echo ".global ${name}"
+    echo "${name}:"
+    echo "    mov     \$${num}, %rax"
+    if [ "$nargs" -ge 6 ]; then
+        echo "    mov     %rcx, %r10"
+        nshreg=$((nshreg+1))
+    fi
+    echo "    syscall"
+    echo "    test    %rax, %rax"
+    echo "    js      syscall_set_errno"
+    echo "    ret"
+done < "$in" > "$out"
+
+echo "Shift register %rcx -> %r10: #${nshreg}"
+echo "Syscall library generated."

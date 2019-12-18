@@ -1,0 +1,73 @@
+#!/bin/bash
+in=syscall/x86_32
+out=arch/x86_32/syscall.S
+echo "Reading from ${in} ..."
+echo "Writing to ${out} ..."
+
+while read -r line; do
+    num=$(echo "$line" | awk '{print $1}')
+    name=$(echo "$line" | awk '{print $2}' | sed 's/sys_//g')
+    nargs=$(echo "$line" | tr '\t' '\n' | grep -c '.')
+    nargs=$((nargs-2))
+    echo "${num} -- ${name} -- ${nargs}" 1>&2
+    echo ".section .text.${name}"
+    echo ".global ${name}"
+    echo "${name}:"
+
+    if [ "$nargs" -eq 5 ]; then
+        echo "    push    %ebx"
+        echo "    push    %esi"
+        echo "    push    %edi"
+        echo "    mov     32(%esp), %edi"
+        echo "    mov     28(%esp), %esi"
+        echo "    mov     24(%esp), %edx"
+        echo "    mov     20(%esp), %ecx"
+        echo "    mov     16(%esp), %ebx"
+        echo "    mov     \$${num}, %eax"
+        echo "    int     \$0x80"
+        echo "    pop     %ebx"
+        echo "    pop     %esi"
+        echo "    pop     %edi"
+    elif [ "$nargs" -eq 4 ]; then
+        echo "    push    %ebx"
+        echo "    push    %esi"
+        echo "    mov     24(%esp), %esi"
+        echo "    mov     20(%esp), %edx"
+        echo "    mov     16(%esp), %ecx"
+        echo "    mov     12(%esp), %ebx"
+        echo "    mov     \$${num}, %eax"
+        echo "    int     \$0x80"
+        echo "    pop     %ebx"
+        echo "    pop     %esi"
+    elif [ "$nargs" -eq 3 ]; then
+        echo "    push    %ebx"
+        echo "    mov     16(%esp), %edx"
+        echo "    mov     12(%esp), %ecx"
+        echo "    mov     8(%esp), %ebx"
+        echo "    mov     \$${num}, %eax"
+        echo "    int     \$0x80"
+        echo "    pop     %ebx"
+    elif [ "$nargs" -eq 2 ]; then
+        echo "    push    %ebx"
+        echo "    mov     12(%esp), %ecx"
+        echo "    mov     8(%esp), %ebx"
+        echo "    mov     \$${num}, %eax"
+        echo "    int     \$0x80"
+        echo "    pop     %ebx"
+    elif [ "$nargs" -eq 1 ]; then
+        echo "    push    %ebx"
+        echo "    mov     8(%esp), %ebx"
+        echo "    mov     \$${num}, %eax"
+        echo "    int     \$0x80"
+        echo "    pop     %ebx"
+    elif [ "$nargs" -ne 0 ]; then
+        echo "Bad syscall args number" 1>&2
+    fi
+
+    echo "    test    %eax, %eax"
+    echo "    js      syscall_set_errno"
+    echo "    ret"
+
+done < "$in" > "$out"
+
+echo "Syscall library generated."

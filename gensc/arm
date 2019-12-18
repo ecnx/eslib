@@ -1,0 +1,58 @@
+#!/bin/bash
+in=syscall/arm
+out=arch/arm/syscall.S
+echo "Reading from ${in} ..."
+echo "Writing to ${out} ..."
+
+while read -r line; do
+    name=$(echo "$line" | awk '{print $1}')
+    num=$(echo "$line" | awk '{print $2}')
+    nargs=$(echo "$line" | tr '\t' '\n' | grep -c '.')
+    nargs=$((nargs-2))
+    echo ".section .text.${name}"
+    echo ".global ${name}"
+    echo "${name}:"
+    echo "${num} -- ${name} -- ${nargs}" 1>&2
+    if [ "$nargs" -ge 5 ]; then
+        echo "    mov     ip, sp"
+    fi
+
+    if [ "$nargs" -gt 6 ]; then
+        echo "Error at ${line}"; exit 1;
+    elif [ "$nargs" -eq 6 ]; then
+        echo "    stmfd   sp!, {r4, r5, r7}"
+    elif [ "$nargs" -eq 5 ]; then
+        echo "    stmfd   sp!, {r4, r7}"
+    else
+        echo "    stmfd   sp!, {r7}"
+    fi
+
+    echo "    movw    r7, #${num}"
+
+    if [ "$nargs" -gt 6 ]; then
+        echo "Error at ${line}"; exit 1;
+    elif [ "$nargs" -eq 6 ]; then
+        echo "    ldmfd   ip!, {r4, r5}"
+    elif [ "$nargs" -eq 5 ]; then
+        echo "    ldmfd   ip!, {r4}"
+    fi
+
+    echo "    svc     #0"
+
+
+    if [ "$nargs" -gt 6 ]; then
+        echo "Error at ${line}"; exit 1;
+    elif [ "$nargs" -eq 6 ]; then
+        echo "    ldmfd   sp!, {r4, r5, r7}"
+    elif [ "$nargs" -eq 5 ]; then
+        echo "    ldmfd   sp!, {r4, r7}"
+    else
+        echo "    ldmfd   sp!, {r7}"
+    fi
+
+    echo "    cmp     r0, #0"
+    echo "    blt     syscall_set_errno"
+    echo "    bx      lr"
+done < "$in" > "$out"
+
+echo "Syscall library generated."

@@ -1,0 +1,5 @@
+#!/bin/bash
+gensc/x86_64 2>&1 | grep -v '\-\-'
+gensc/x86_32 2>&1 | grep -v '\-\-'
+gensc/mips 2>&1 | grep -v '\-\-'
+gensc/arm 2>&1 | grep -v '\-\-'

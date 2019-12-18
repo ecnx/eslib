@@ -1,0 +1,21 @@
+#!/bin/bash
+in=syscall/mips
+out=arch/mips/syscall.S
+echo "Reading from ${in} ..."
+echo "Writing to ${out} ..."
+
+while read -r line; do
+    num=$(echo "$line" | awk '{print $5}' | tr -d '()')
+    num=$((num+4000))
+    name=$(echo "$line" | awk '{print $2}' | sed 's/__NR_//g')
+    echo "${num} -- ${name}" 1>&2
+    echo ".section .text.${name}"
+    echo ".global ${name}"
+    echo "${name}:"
+    echo "    li      \$v0, ${num}"
+    echo "    syscall"
+    echo "    bne     \$a3, \$zero, syscall_set_errno"
+    echo "    jr      \$ra"
+done < "$in" > "$out"
+
+echo "Syscall library generated."
